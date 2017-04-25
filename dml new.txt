@@ -1,0 +1,120 @@
+CREATE OR REPLACE PROCEDURE INSERTairport (  
+air_id airport_201277.air_code%TYPE,  
+a_name airport_201277.air_name %TYPE,  
+a_city airport_201277.air_city%TYPE,
+a_country airport_201277.air_country%TYPE)    
+IS  
+BEGIN  
+INSERT INTO airport_201277(air_code,air_name,air_city,air_country)  
+VALUES (air_id,a_name,a_city,a_country);  
+COMMIT;  
+END;
+/
+
+begin
+insertairport(2,'Delhi airport','Delhi','India');
+end;
+
+
+CREATE OR REPLACE PROCEDURE INSERTfare (  
+f_id fare_201277.fare_id%TYPE,  
+f_amt fare_201277. fare_amt%TYPE  
+)    
+IS  
+BEGIN  
+INSERT INTO fare_201277(fare_id,fare_amt)  
+VALUES (f_id,f_amt);  
+COMMIT;  
+END;  
+/  
+
+begin
+insertfare(22,4300);
+end;
+
+
+CREATE OR REPLACE PROCEDURE INSERTroute (  
+r_no route_201277.route_no%TYPE,  
+r_desc route_201277.route_desc%TYPE,
+fa_id route_201277.fare_id%type  
+)    
+IS  
+BEGIN  
+INSERT INTO route_201277(route_no,route_desc,fare_id)  
+VALUES (r_no,r_desc,fa_id);  
+COMMIT;  
+END;  
+/ 
+
+begin
+insertroute(21,'Mumbai to Kolkata',11);
+end;
+
+
+
+CREATE OR REPLACE PROCEDURE INSERTflight (  
+f_no flight_201277.f_id%TYPE,  
+ar_date flight_201277.arr_date%TYPE,
+d_time flight_201277.dep_time%type,
+d_date flight_201277.dep_date%type,
+cls flight_201277.class_type%type,
+f_loc flight_201277.from_loc%type,
+t_loc flight_201277.to_loc%type,
+ar_time flight_201277.arr_time%type,
+a_code flight_201277.air_code%type,
+r_no flight_201277.route_no%type,
+f_nm flight_201277.f_name%type,
+f_mt flight_201277.f_amt%type
+)    
+IS  
+BEGIN  
+INSERT INTO flight_201277(f_id,arr_date,dep_time,dep_date,class_type,from_loc,to_loc,arr_time,air_code,route_no,f_name,f_amt)  
+VALUES (f_no,ar_date,d_time,d_date,cls,f_loc,t_loc,ar_time,a_code,r_no,f_nm,f_mt);  
+COMMIT;  
+END;  
+/  
+
+begin
+insertflight(459,'03-nov-2017','09:30:00pm ','03-jan-2017','Economy','Mumbai','Bbsr','11:30:00pm',2,27,'Vistara','4400');
+end;
+
+
+
+CREATE OR REPLACE PROCEDURE INSERTpassenger (  
+Pa_id passenger_201277.p_id%TYPE,  
+p_add passenger_201277.p_address%TYPE,
+pa_mob passenger_201277.p_mobno%type,
+pa_gender passenger_201277.p_gender%type,
+pa_age passenger_201277.p_age%type,
+pa_name passenger_201277.p_name%type,
+fl_id passenger_201277.f_id%type,
+p_pass passenger_201277.p_pwd%type
+)    
+IS  
+BEGIN  
+INSERT INTO passenger_201277(p_id,p_address,p_mobno,p_gender,p_age,p_name,f_id,p_pwd)  
+VALUES (pa_id,p_add,pa_mob,pa_gender,pa_age,pa_name,fl_id,p_pass);  
+COMMIT;  
+END;  
+/  
+
+begin
+insertpassenger(303,'Mumbai','8996309107','female',23,'Pinky',101,'hsd');
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

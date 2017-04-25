@@ -1,0 +1,25 @@
+create table airport_201277(
+air_code number primary key,air_name varchar2(20) not null,
+air_city varchar2(20) not null,air_country varchar2(20) not null);
+
+create table fare_201277(fare_id number primary key,fare_amt number not null);
+
+create table route_201277(
+route_no number primary key,route_desc varchar2(20) not null,
+fare_id references fare_201277(fare_id) on delete cascade);
+
+create table flight_201277(f_id number primary key,arr_date varchar2(30) not null,
+dep_time varchar2(30) not null,dep_date varchar2(30) not null,class_type varchar2(10) not null,
+from_loc varchar2(20) not null,to_loc varchar2(20) not null,arr_time varchar2(30)
+ not null,air_code references airport_201277(air_code) on delete cascade,route_no number references
+ route_201277(route_no) on delete cascade);
+
+
+create table passenger_201277(p_id number primary key,p_address varchar2(20) not null,
+p_mobno number not null,p_gender varchar2(10) not null,
+p_age number not null,p_name varchar2(20),p_pwd varchar2(30), 
+f_id references flight_201277(f_id) on delete cascade);
+
+
+
+
