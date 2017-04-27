@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app="taskManagerApp"  ng-controller="taskManagerController">
+<html ng-app="taskManagerApp" ng-controller="taskManagerController">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="shortcut icon" href="">
 </head>
 <body background="https://images.trvl-media.com/media/content/expus/graphics/launch/home/tvly/150324_flights-hero-image_1330x742.jpg">
 
@@ -24,123 +21,62 @@
       <li class="active">
       <a href="home.jsp">Home</a></li>
       <li><a href="index.jsp">Login</a></li>
-      <li><a href="Book.jsp">Book flights</a></li>
+  
       <li><a href="About.jsp">About us</a></li>
-        <li><a href="Logout.jsp">Logout</a></li>
-      
+         <li><a href="Logout.jsp">Logout</a></li>
     </ul>
 
   </div>
 </nav>
 
-<div>
-<div>
-
- <center><div class="container">
-    <label><b>Arrival Date</b></label>
-    <input type="text" placeholder="Enter Arrival date" ng-model="arr_date" required><br><br>
-    
-     <label><b>Departure date</b></label>
-    <input type="text" placeholder="Enter Departure date" ng-model="dep_date" required><br><br>
-    
-     <label><b>Class</b></label>
-  
-      <select ng-model="class_type"  value="Business" required>
-  <option value="Business" ng-model="ilocation">Business</option>
-  <option value="Economy" ng-model="ilocation">Economy</option>
-  </select>
-  <br><br>
-
- <label><b> Location</b></label>
-  
-      <select ng-model="from_loc"  value="Bangalore" required>
-  <option value="Bangalore" ng-model="slocation">Bangalore</option>
-  <option value="Kolkata" ng-model="slocation">Kolkata</option>
-  <option value="Delhi" ng-model="slocation">Delhi</option>
-   <option value="Bhubaneswar"  ng-model="slocation">Bhubaneswar</option>
-  <option value="Pune" ng-model="slocation">Pune</option>
-   <option value="Mumbai" ng-model="slocation">Mumbai</option>
-</select>
-    <br><br>
-
- <label><b>Destination</b></label>
-  
-     <select ng-model="to_loc"  required>
-  <option value="Bangalore" ng-model="dlocation">Bangalore</option>
-  <option value="Kolkata" ng-model="dlocation" selected>Kolkata</option>
-  <option value="Delhi" ng-model="dlocation">Delhi</option>
-   <option value="Bhubaneswar"  ng-model="dlocation">Bhubaneswar</option>
-  <option value="Pune" ng-model="dlocation">Pune</option>
-   <option value="Mumbai" ng-model="dlocation">Mumbai</option>
-</select>
-<br><br>
-
- <label><b> Airport</b></label>
-  
-    <select ng-model="air_code" value="1" required>
-  <option value="1" ng-model="plocation">Bangalore</option>
-  <option value="2"  ng-model="plocation">Kolkata</option>
-  <option value="3"  ng-model="plocation">Bhubaneswar</option>
-  <option value="4" ng-model="plocation">Pune</option>
-   <option value="5" ng-model="plocation">Mumbai</option>
-   <option value="6" ng-model="plocation">Delhi</option>
-</select>
-<br><br>
-
-
-    <div class="clearfix">
-     <button ng-click="clickButton()" class="btn-panel-big">Submit</button>
-    </div>
-  </div></center>
 
 
 
-</div>
-</div>
 
+<font color="white">
+Flight id:</font><input type="text" placeholder="Enter Flight_Id" ng-model="f_id" required><br><br>
+
+
+
+<button ng-click="del()" >Delete</button>
 <script>
-
 var taskManagerModule = angular.module('taskManagerApp', []);
 taskManagerModule.controller('taskManagerController', function ($scope,$http,$window) 
 {
  var urlBase="http://localhost:8080/RegisterD";
- //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+ $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
  
 //add a new task
- $scope.clickButton = function clickButton()
+ $scope.del = function del() 
  {
 	 alert("In function");
-/*	  if($scope.arr_date=="" || $scope.dep_date=="" || $scope.class_type == "" || $scope.from_loc == ""||$scope.to_loc == ""
-			 ||$scope.air_code == "")
+	 /* if($scope.p_id=="" || $scope.p_address=="" || $scope.p_mobno == "" || $scope.p_gender == ""||$scope.p_age == ""
+			 ||$scope.p_name == ""||$scope.f_id == ""||$scope.p_pwd == "")
 	      {
 		   alert("Insufficient Data! Please provide values");
 		  }
 	 else
-	*/	  
-   $http.post(urlBase + '/book/' +$scope.arr_date+'/'+$scope.dep_date+'/'+$scope.class_type+'/'+$scope.from_loc+'/'+
-		   $scope.to_loc+'/'+$scope.air_code).success(function(data) {
+		  */
+   $http.post(urlBase + '/delete/'+$scope.f_id).success(function(data) {
 			
-    alert("Details are:");
-    
-    $window.location="Details.jsp";
+    alert("Deleted");
+			   $window.location="DelSuccess.jsp";
+ 
     $scope.users = data; 
-    $scope.arr_date="";
-    $scope.dep_date="";
-    $scope.class_type="";
-    $scope.from_loc="";
-    $scope.to_loc="";
-    $scope.air_code="";
+    $scope.f_id="";
   
-      })
-		 
-	 alert("End of function");
- }
+ 
+      });
+   alert("End of fn");
+
+		 }
  
 }); 
 
 </script>
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<font color="white">
+
+ <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <font color="white">
 <link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 <!--footer start from here-->
 <footer>
@@ -160,7 +96,7 @@ taskManagerModule.controller('taskManagerController', function ($scope,$http,$wi
           <li><a href="Career.jsp"> Career</a></li>
           <li><a href="Privacy.jsp"> Privacy Policy</a></li>
           <li><a href="tnc.jsp"> Terms & Conditions</a></li>
-         
+
         </ul>
       </div>
       <div class="col-md-3 col-sm-6 paddingtop-bottom">
@@ -196,5 +132,6 @@ taskManagerModule.controller('taskManagerController', function ($scope,$http,$wi
   </div>
 </div>
 </font>
+
 </body>
 </html>
