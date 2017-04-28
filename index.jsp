@@ -161,6 +161,7 @@ $scope.validation=function validation(){
    }
 	  else{
 		  if($scope.userName=="Diksha" && $scope.password=='yui'){
+			  alert("Successful");
               $window.location="Admin.jsp";
         }
         else{
